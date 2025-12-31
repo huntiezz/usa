@@ -11,8 +11,6 @@ const add = (t, lat, lng) => L.marker([lat, lng], {
 add("USA != EU", 38, -97);
 add("EUROPE", 48, 10);
 
-document.getElementById('don').onclick = () => document.getElementById('modal').style.display = 'flex';
-
 const r = document.getElementById('run');
 r.onmouseover = () => {
   Object.assign(r.style, { position: 'fixed', left: Math.random() * (window.innerWidth - 300) + 'px', top: Math.random() * (window.innerHeight - 100) + 'px' });
