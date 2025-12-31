@@ -1,25 +1,23 @@
 import './style.css';
 import L from 'leaflet';
-import gsap from 'gsap';
 
 const map = L.map('map', { zoomControl: false, attributionControl: false }).setView([45, -40], 3);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-const mark = (t, lat, lng) => {
-  L.marker([lat, lng], { icon: L.divIcon({ className: 'x', html: `<div class="tooltip">${t}</div><div class="arrow"></div>`, iconSize: [120, 50], iconAnchor: [60, 50] }) }).addTo(map);
-}
-mark("THIS IS USA", 38, -97);
-mark("THIS IS EUROPE", 48, 10);
+const add = (t, lat, lng) => L.marker([lat, lng], {
+  icon: L.divIcon({ className: 'x', html: `<div class="market">${t}</div><div class="arw"></div>`, iconSize: [100, 50], iconAnchor: [50, 40] })
+}).addTo(map);
 
-gsap.from("header", { y: -50, opacity: 0, duration: 1 });
-gsap.from(".card", { y: 30, opacity: 0, duration: 0.8, stagger: 0.2, delay: 0.2 });
+add("USA != EU", 38, -97);
+add("EUROPE", 48, 10);
 
-const m = document.getElementById('modal'), b = document.getElementById('don'), c = document.getElementById('close');
-b.onclick = () => m.classList.remove('hidden');
-c.onclick = () => m.classList.add('hidden');
-m.onclick = (e) => e.target === m && m.classList.add('hidden');
+document.getElementById('don').onclick = () => document.getElementById('modal').style.display = 'flex';
 
 const r = document.getElementById('run');
 r.onmouseover = () => {
-  gsap.to(r, { left: Math.random() * (window.innerWidth - 300), top: Math.random() * (window.innerHeight - 100), position: 'fixed', duration: 0.1, ease: "power1.out" });
+  Object.assign(r.style, { position: 'fixed', left: Math.random() * (window.innerWidth - 300) + 'px', top: Math.random() * (window.innerHeight - 100) + 'px' });
 };
+
+setInterval(() => {
+  map.flyTo(Math.random() > .5 ? [38, -97] : [48, 10], 4, { duration: 2.5 });
+}, 8000);
