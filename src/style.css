@@ -197,3 +197,20 @@ span {
   border-top-color: #0f172a;
   margin: 0 auto
 }
+
+.gh {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  z-index: 99
+}
+
+.gh:hover {
+  opacity: 1
+}
+
+.gh img {
+  width: 24px
+}
